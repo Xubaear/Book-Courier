@@ -12,6 +12,10 @@ import HomeLayout from "../Layout/HomeLayout";
         }
     ]
   },
+  {
+        path: '/*',
+        Component: Error
+      }
 ]);
 
 export default router;
