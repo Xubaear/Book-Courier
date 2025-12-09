@@ -7,7 +7,7 @@ const links =(
  <>
  <li> <Link to='/'>Home</Link></li>
   <li><Link to='/all-books'> All Books</Link></li>
-  <li><Link>Dashboard</Link></li>
+  <li><Link to='/dashboard'>Dashboard</Link></li>
  </>
 )
 
