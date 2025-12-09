@@ -22,7 +22,7 @@ const Coverage = () => {
 
       
 
-     <div className='flex justify-center items-center gap-100'>
+     <div className='flex justify-center items-center gap-20 mx-20'>
          <div className='border w-[500px] h-[400px]  mb-10'>
         <MapContainer
           center={position}
@@ -56,17 +56,26 @@ const Coverage = () => {
 
 
       <div>
-        <h3>Why choose BookCourier</h3>
+        <h3 className='text-4xl -mt-12 mb-2 font-bold text-cyan-500'>Why choose BookCourier</h3>
 
         <div className='grid grid-cols-1'>
-            <div>
-                1
+            <div className='my-3'>
+                <h2 className='text-2xl text-amber-500 font-semibold'>Premium Packaging</h2>
+                <p className='text-gray-400'>
+                    We use waterproof bubble wrapping to ensure <br /> your books arrive in mint condition, safe from any transit damage.
+                </p>
             </div>
             <div>
-                2
+                <h2 className='text-2xl text-amber-500 font-semibold'>Super Fast Delivery</h2>
+                <p className='text-gray-400'>
+                    We prioritize speed with our express delivery network, <br /> ensuring your books reach you within the shortest possible time.
+                </p>
             </div>
-            <div>
-                3
+            <div className='my-3'>
+                <h2 className='text-2xl text-amber-500 font-semibold'>Low Cost & Tracking</h2>
+                <p className='text-gray-400'>
+                    Enjoy the most affordable delivery rates and track your <br /> parcel in real-time until it reaches your doorstep.
+                </p>
             </div>
         </div>
       </div>
