@@ -1,7 +1,9 @@
 import React from 'react';
 import bookImg from '../assets/tom-kitto-mNugyJ5IKwo-unsplash.jpg'
+import Books from './Books';
 const Banner = () => {
     return (
+     <>
         <div className='flex justify-between items-center ml-20 mr-20'>
             <div>
                <h1 className='text-6xl font-semibold'> BookCourier - <br />
@@ -20,6 +22,8 @@ const Banner = () => {
                 <img className='w-140 h-100 rounded-xl' src={bookImg} alt="" />
             </div>
         </div>
+        <Books></Books>
+     </>
     );
 };
 
