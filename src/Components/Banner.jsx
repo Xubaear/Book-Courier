@@ -1,6 +1,7 @@
 import React from 'react';
 import bookImg from '../assets/tom-kitto-mNugyJ5IKwo-unsplash.jpg'
 import Books from './Books';
+import Coverage from './Coverage';
 const Banner = () => {
     return (
      <>
@@ -23,6 +24,7 @@ const Banner = () => {
             </div>
         </div>
         <Books></Books>
+        <Coverage></Coverage>
      </>
     );
 };
