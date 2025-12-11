@@ -7,6 +7,7 @@ import Error from "../Pages/Error";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 
+
  const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,7 @@ import Register from "../Pages/Register";
           path: '/all-books',
           Component: AllBooks
         },
+        
         {
           path: '/dashboard',
           Component: Dashboard
