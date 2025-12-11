@@ -2,6 +2,7 @@ import React from 'react';
 import bookImg from '../assets/tom-kitto-mNugyJ5IKwo-unsplash.jpg'
 import Books from './Books';
 import Coverage from './Coverage';
+import { Link } from 'react-router';
 const Banner = () => {
     return (
      <>
@@ -16,7 +17,8 @@ const Banner = () => {
                     favourite library without visiting physically
                 </p>
 
-                <button className="btn btn-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-5">Get Strated</button>
+               <Link to='/login'> <button  className="btn btn-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-5">Get Strated</button></Link>
+                
             </div>
 
             <div>
