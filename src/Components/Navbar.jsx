@@ -26,7 +26,8 @@ const links =(
         
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">BookCourier</a>
+    
+    <Link className="btn btn-ghost text-xl" to='/'>BookCourier</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

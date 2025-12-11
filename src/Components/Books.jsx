@@ -30,6 +30,9 @@ const Books = () => {
             <h2 className='text-base font-semibold leading-tight'>{book.title}</h2>
             <p className='text-xs text-gray-600'>{book.author}</p>
             <p className='text-[11px] text-gray-500'>{book.genre}</p>
+            <p className='text-sm font-bold text-orange-400'>
+                            Price: {book.price} taka
+                        </p>
 
             <p className='mt-auto text-xs'>
                 Status: 

@@ -3,6 +3,9 @@ import HomeLayout from "../Layout/HomeLayout";
 import Home from "../Components/Home";
 import AllBooks from "../Pages/AllBooks";
 import Dashboard from "../Pages/Dashboard";
+import Error from "../Pages/Error";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
  const router = createBrowserRouter([
   {
@@ -21,6 +24,14 @@ import Dashboard from "../Pages/Dashboard";
         {
           path: '/dashboard',
           Component: Dashboard
+        },
+        {
+          path: '/login',
+          Component: Login
+        },
+        {
+          path: '/register',
+          Component: Register
         }
     ]
   },
