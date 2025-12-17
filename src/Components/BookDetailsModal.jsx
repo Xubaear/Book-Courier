@@ -1,9 +1,10 @@
-
 import React, { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../Provider/AuthProvider"; // পাথ ঠিক আছে কিনা দেখবেন
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BookDetailsModal = ({ book, closeModal }) => {
-  
+
   const { user } = useContext(AuthContext);
 
   const handlePlaceOrder = (e) => {
@@ -14,13 +15,10 @@ const BookDetailsModal = ({ book, closeModal }) => {
       bookId: book._id,
       bookTitle: book.title,
       price: book.price,
-
       customerName: user?.displayName,
       email: user?.email,
-
       phone: form.phone.value,
       address: form.address.value,
-
       status: "pending",
       paymentStatus: "unpaid",
       createdAt: new Date()
@@ -34,8 +32,13 @@ const BookDetailsModal = ({ book, closeModal }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          alert("Order Placed Successfully!");
-          closeModal();
+          // ১. টোস্ট দেখাবে
+          toast.success("Order Placed Successfully!");
+          
+          // ২. টোস্ট যাতে দেখা যায় তাই ২ সেকেন্ড পর মডাল বন্ধ হবে
+          setTimeout(() => {
+            closeModal();
+          }, 2000); 
         }
       });
   };
@@ -50,55 +53,56 @@ const BookDetailsModal = ({ book, closeModal }) => {
           ✕
         </button>
 
-        <h3 className="font-bold text-2xl mb-6 text-center">Order Information</h3>
+        <h3 className="font-bold text-2xl mb-6 text-center text-white">Order Information</h3>
 
         <form onSubmit={handlePlaceOrder} className="space-y-4">
 
           {/* Name */}
           <div>
-            <label className="block text-sm font-bold mb-1">Name</label>
+            <label className="block text-sm font-bold mb-1 text-white">Name</label>
             <input
               type="text"
               defaultValue={user?.displayName}
               readOnly
-              className="w-full p-2 border rounded bg-gray-100"
+              className="w-full p-2 border rounded text-black bg-gray-100"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-bold mb-1">Email</label>
+            <label className="block text-sm font-bold mb-1 text-white">Email</label>
             <input
               type="text"
               defaultValue={user?.email}
               readOnly
-              className="w-full p-2 border rounded bg-gray-100"
+              className="w-full p-2 border rounded text-black bg-gray-100"
             />
           </div>
 
           {/* Phone Number */}
           <div>
-            <label className="block text-sm font-bold mb-1">Phone Number</label>
+            <label className="block text-sm font-bold mb-1 text-white">Phone Number</label>
             <input
               type="text"
               name="phone"
               required
               placeholder="Enter your phone"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-black"
             />
           </div>
 
           {/* Address */}
           <div>
-            <label className="block text-sm font-bold mb-1">Address</label>
+            <label className="block text-sm font-bold mb-1 text-white">Address</label>
             <textarea
               name="address"
               required
               placeholder="Enter shipping address"
-              className="w-full p-2 border rounded h-24"
+              className="w-full p-2 border rounded h-24 text-black"
             ></textarea>
           </div>
 
+          {/* Submit Button (onSubmit সরানো হয়েছে) */}
           <button
             type="submit"
             className="w-full py-2 bg-green-600 text-white font-bold rounded hover:bg-green-700"
@@ -106,6 +110,9 @@ const BookDetailsModal = ({ book, closeModal }) => {
             Place Order
           </button>
         </form>
+
+        
+        <ToastContainer position="top-right" autoClose={1500} />
       </div>
     </div>
   );

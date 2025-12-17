@@ -1,15 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import BookDetailsModal from "../Components/BookDetailsModal";
+import { AuthContext } from "../Provider/AuthProvider"; // পাথ চেক করুন
 
 const Books = () => {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
+  
+  const { user } = useContext(AuthContext); // ইউজার চেক করার জন্য
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:3000/books/latest")
+    // ফিক্স: ব্যাকএন্ডের রাউটের সাথে মিল রেখে URL ঠিক করা হলো
+    fetch("http://localhost:3000/latest-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);
+
+  // বইয়ে ক্লিক করলে এই ফাংশনটি কল হবে
+  const handleBookClick = (book) => {
+    if (user) {
+      // ইউজার লগইন থাকলে মোডাল ওপেন হবে
+      setSelectedBook(book);
+    } else {
+      // লগইন না থাকলে লগইন পেজে পাঠিয়ে দেবে
+      // state দিয়ে লোকেশন মনে রাখা হচ্ছে, যাতে লগইন শেষে আবার এখানে ফিরে আসে
+      navigate('/login', { state: { from: location } });
+    }
+  };
 
   return (
     <div>
@@ -21,7 +40,7 @@ const Books = () => {
         {books.map((book) => (
           <div
             key={book._id}
-            onClick={() => setSelectedBook(book)}
+            onClick={() => handleBookClick(book)} // নতুন ফাংশন কল
             className="rounded-lg shadow-md p-3 border cursor-pointer hover:scale-105 hover:shadow-xl transition"
           >
             <img

@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import app from '../Firebase/firebase.config'; // this now works
-
+import app from '../Firebase/firebase.config'; 
 import { 
   createUserWithEmailAndPassword, 
   getAuth, 
@@ -8,61 +7,85 @@ import {
   onAuthStateChanged, 
   signInWithEmailAndPassword, 
   signInWithPopup, 
-  signOut 
+  signOut,
+  updateProfile 
 } from "firebase/auth";
 
 const auth = getAuth(app);
 export const AuthContext = createContext();
-
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // এই স্টেটটা আপনি ব্যবহার করতে চাচ্ছেন
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+        displayName: name, 
+        photoURL: photo
+    });
+  }
+
   const signIn = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signInWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider)
       .then((result) => {
         const loggedUser = result.user;
-        console.log("Google login user:", loggedUser);
-        setUser(loggedUser);
+        const saveUser = { 
+            name: loggedUser.displayName, 
+            email: loggedUser.email,
+            role: 'user'
+        };
+
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(saveUser)
+        })
+        .then(res => res.json())
+        .then(() => {
+             setUser(loggedUser);
+        });
+        
         return loggedUser;
-      })
-      .catch((error) => {
-        console.error("Google login error:", error);
       });
   };
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("Current User:", currentUser);
       setUser(currentUser);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
+  // ==========================================
+  // ফিক্স: এখানে setUser যুক্ত করা হয়েছে
+  // ==========================================
   const authData = {
     user,
+    setUser, // <--- এই লাইনটা আপনার মিসিং ছিল
     loading,
-    setUser,
     createUser,
-    logOut,
+    updateUserProfile, 
     signIn,
     signInWithGoogle,
+    logOut
   };
 
   return (

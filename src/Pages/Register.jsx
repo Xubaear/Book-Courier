@@ -1,52 +1,79 @@
-import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router';
-import { AuthContext } from '../Provider/AuthProvider';
+import React, { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider'; // আপনার পাথ অনুযায়ী
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = 'Register';
   }, []);
 
-  const { createUser, setUser, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, updateUserProfile, signInWithGoogle, setUser } = useContext(AuthContext);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-
     const form = e.target;
     const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
 
+    // ভ্যালিডেশন
     const passwordPattern = /^.{6,}$/;
     const casePatterns = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
 
     if (!passwordPattern.test(password)) {
       toast.error('Password must be six characters or more');
       return;
-    } else if (!casePatterns.test(password)) {
+    }
+    if (!casePatterns.test(password)) {
       toast.error('Password must have at least one uppercase & one lowercase character');
       return;
     }
 
-    createUser(email, password)
-      .then((res) => {
-        const user = res.user;
-        setUser(user);
-        toast.success('Account created successfully!');
-      })
-      .catch((error) => {
-        toast.error(error.message);
+    try {
+      // ১. ফায়ারবেসে ইউজার তৈরি করা
+      const result = await createUser(email, password);
+      const loggedUser = result.user;
+      
+      // ২. প্রোফাইল আপডেট করা (নাম ও ছবি)
+      await updateUserProfile(name, photo);
+      
+      // স্টেট আপডেট করে দেওয়া যাতে সাথে সাথে নাম দেখায়
+      setUser({ ...loggedUser, displayName: name, photoURL: photo });
+
+      // ৩. ডাটাবেজে ইউজার ইনফো পাঠানো
+      const userInfo = { name, email, role: 'user' };
+
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(userInfo)
       });
+
+      const data = await response.json();
+
+      // ৪. সবকিছু ঠিক থাকলে সাকসেস মেসেজ এবং রিডাইরেক্ট
+      if (data.insertedId || data.message === 'User already exists') {
+        toast.success('Registration Successful!');
+        form.reset();
+        navigate('/'); // হোম পেজে পাঠাবে
+      }
+
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message); // কোনো এরর হলে এখানে দেখাবে
+    }
   };
 
   const handleGoogleRegister = () => {
     signInWithGoogle()
       .then((result) => {
-        setUser(result.user);
-        toast.success('Google registration successful!');
+        toast.success('Google Registration Successful!');
+        navigate('/');
       })
       .catch((error) => {
         toast.error(error.message);
@@ -57,7 +84,7 @@ const Register = () => {
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body ">
+          <div className="card-body">
             <h1 className="text-5xl font-bold">Register Now!</h1>
 
             <form onSubmit={handleRegister}>
@@ -97,9 +124,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-
-      
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };
