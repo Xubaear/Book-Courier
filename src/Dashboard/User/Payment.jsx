@@ -12,7 +12,7 @@ const Payment = () => {
 
     
     useEffect(() => {
-        fetch(`http://localhost:3000/orders/${id}`)
+        fetch(`https://bookcourier.vercel.app/orders/${id}`)
             .then(res => res.json())
             .then(data => setOrder(data))
             .catch(err => console.error(err));
@@ -34,7 +34,7 @@ const Payment = () => {
         };
 
       
-        fetch('http://localhost:3000/payments', {
+        fetch('https://bookcourier.vercel.app/payments', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(paymentInfo)

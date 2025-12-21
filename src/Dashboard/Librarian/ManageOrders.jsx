@@ -9,14 +9,14 @@ const ManageOrders = () => {
    
     useEffect(() => {
        
-        fetch(`http://localhost:3000/orders/librarian?email=${user?.email}`) 
+        fetch(`https://bookcourier.vercel.app/orders/librarian?email=${user?.email}`) 
             .then(res => res.json())
             .then(data => setOrders(data));
     }, [user]);
 
   
     const handleStatusChange = (id, newStatus) => {
-        fetch(`http://localhost:3000/orders/status/${id}`, {
+        fetch(`https://bookcourier.vercel.app/orders/status/${id}`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ status: newStatus })

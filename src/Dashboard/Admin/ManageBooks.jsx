@@ -6,7 +6,7 @@ const ManageBooks = () => {
 
     
     useEffect(() => {
-        fetch('http://localhost:3000/books')
+        fetch('https://bookcourier.vercel.app/books')
             .then(res => res.json())
             .then(data => setBooks(data));
     }, []);
@@ -14,7 +14,7 @@ const ManageBooks = () => {
     
     const handleToggleStatus = (id, currentStatus) => {
         const newStatus = !currentStatus;
-        fetch(`http://localhost:3000/books/${id}`, {
+        fetch(`https://bookcourier.vercel.app/books/${id}`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ available: newStatus })
@@ -36,7 +36,7 @@ const ManageBooks = () => {
     const handleDelete = (id) => {
         if(!confirm("Are you sure? This will delete all orders related to this book!")) return;
 
-        fetch(`http://localhost:3000/books/${id}`, {
+        fetch(`https://bookcourier.vercel.app/books/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())

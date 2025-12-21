@@ -48,7 +48,7 @@ const Register = () => {
       
       const userInfo = { name, email, role: 'user' };
 
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch('https://bookcourier.vercel.app/users', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(userInfo)

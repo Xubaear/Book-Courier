@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
             role: 'user'
         };
 
-        fetch('http://localhost:3000/users', {
+        fetch('https://bookcourier.vercel.app/users', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(saveUser)
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth)
         .then(() => {
             
-            fetch('http://localhost:3000/logout', { method: 'POST', credentials: 'include' });
+            fetch('https://bookcourier.vercel.app/logout', { method: 'POST', credentials: 'include' });
             setLoading(false);
         });
   };
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
        
         const userInfo = { email: currentUser.email };
         
-        fetch('http://localhost:3000/jwt', {
+        fetch('https://bookcourier.vercel.app/jwt', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -99,7 +99,7 @@ const AuthProvider = ({ children }) => {
 
       } else {
         
-        fetch('http://localhost:3000/logout', {
+        fetch('https://bookcourier.vercel.app/logout', {
             method: 'POST',
             credentials: 'include'
         })

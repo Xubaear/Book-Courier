@@ -10,7 +10,7 @@ const useRole = () => {
         
         if (!loading && user?.email) {
             setIsRoleLoading(true);
-            fetch(`http://localhost:3000/users/${user.email}`)
+            fetch(`https://bookcourier.vercel.app/users/${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setRole(data?.role);

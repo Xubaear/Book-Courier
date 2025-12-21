@@ -10,7 +10,7 @@ const AllBooks = () => {
   const [sortOrder, setSortOrder] = useState("default");
 
   useEffect(() => {
-    fetch("http://localhost:3000/books")
+    fetch("https://bookcourier.vercel.app/books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);

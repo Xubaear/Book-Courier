@@ -8,7 +8,7 @@ const Invoices = () => {
     useEffect(() => {
         if (user?.email) {
             
-            fetch(`http://localhost:3000/payments?email=${user.email}`)
+            fetch(`https://bookcourier.vercel.app/payments?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => setPayments(data));
         }

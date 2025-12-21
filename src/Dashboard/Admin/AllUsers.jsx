@@ -6,14 +6,14 @@ const AllUsers = () => {
 
     
     useEffect(() => {
-        fetch('http://localhost:3000/users')
+        fetch('https://bookcourier.vercel.app/users')
             .then(res => res.json())
             .then(data => setUsers(data));
     }, []);
 
    
     const handleMakeRole = (email, newRole) => {
-        fetch('http://localhost:3000/users/role', {
+        fetch('https://bookcourier.vercel.app/users/role', {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ email, role: newRole })

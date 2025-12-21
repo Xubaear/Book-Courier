@@ -20,7 +20,7 @@ const AddBook = () => {
             createdAt: new Date()
         };
 
-        fetch('http://localhost:3000/books', {
+        fetch('https://bookcourier.vercel.app/books', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(bookData)

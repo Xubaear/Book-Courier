@@ -11,7 +11,7 @@ const MyOrders = () => {
     useEffect(() => {
         if (user?.email) {
            
-            fetch(`http://localhost:3000/orders/user?email=${user.email}`, {
+            fetch(`https://bookcourier.vercel.app/orders/user?email=${user.email}`, {
                 method: 'GET',
                 credentials: 'include' 
             })
@@ -25,7 +25,7 @@ const MyOrders = () => {
         const proceed = window.confirm("Are you sure you want to cancel?");
         if (proceed) {
             
-            fetch(`http://localhost:3000/orders/cancel/${id}`, {
+            fetch(`https://bookcourier.vercel.app/orders/cancel/${id}`, {
                 method: 'PATCH',
                 credentials: 'include'
             })

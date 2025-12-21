@@ -13,7 +13,7 @@ const Books = () => {
 
   useEffect(() => {
     
-    fetch("http://localhost:3000/latest-books")
+    fetch("https://bookcourier.vercel.app/latest-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);

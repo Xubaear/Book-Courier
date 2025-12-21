@@ -9,7 +9,7 @@ const MyBooks = () => {
  
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/books/librarian?email=${user.email}`)
+            fetch(`https://bookcourier.vercel.app/books/librarian?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => setBooks(data));
         }
@@ -19,7 +19,7 @@ const MyBooks = () => {
     const handleDelete = (id) => {
         const confirm = window.confirm("Are you sure you want to delete this book?");
         if (confirm) {
-            fetch(`http://localhost:3000/books/${id}`, {
+            fetch(`https://bookcourier.vercel.app/books/${id}`, {
                 method: 'DELETE'
             })
             .then(res => res.json())
