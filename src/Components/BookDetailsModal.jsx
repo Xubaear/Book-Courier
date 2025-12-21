@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider"; // পাথ ঠিক আছে কিনা দেখবেন
+import { AuthContext } from "../Provider/AuthProvider"; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,6 +15,10 @@ const BookDetailsModal = ({ book, closeModal }) => {
       bookId: book._id,
       bookTitle: book.title,
       price: book.price,
+      
+      
+      librarianEmail: book.librarianEmail, 
+
       customerName: user?.displayName,
       email: user?.email,
       phone: form.phone.value,
@@ -32,10 +36,10 @@ const BookDetailsModal = ({ book, closeModal }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          // ১. টোস্ট দেখাবে
+        
           toast.success("Order Placed Successfully!");
           
-          // ২. টোস্ট যাতে দেখা যায় তাই ২ সেকেন্ড পর মডাল বন্ধ হবে
+         
           setTimeout(() => {
             closeModal();
           }, 2000); 
@@ -57,7 +61,7 @@ const BookDetailsModal = ({ book, closeModal }) => {
 
         <form onSubmit={handlePlaceOrder} className="space-y-4">
 
-          {/* Name */}
+        {/* Name  */}
           <div>
             <label className="block text-sm font-bold mb-1 text-white">Name</label>
             <input
@@ -102,7 +106,7 @@ const BookDetailsModal = ({ book, closeModal }) => {
             ></textarea>
           </div>
 
-          {/* Submit Button (onSubmit সরানো হয়েছে) */}
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full py-2 bg-green-600 text-white font-bold rounded hover:bg-green-700"
@@ -111,8 +115,7 @@ const BookDetailsModal = ({ book, closeModal }) => {
           </button>
         </form>
 
-        
-        <ToastContainer position="top-right" autoClose={1500} />
+        <ToastContainer position="top-center" autoClose={1500} />
       </div>
     </div>
   );

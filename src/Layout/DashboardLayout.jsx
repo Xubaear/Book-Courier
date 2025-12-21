@@ -9,17 +9,17 @@ const DashboardLayout = () => {
         <div>
             <Navbar></Navbar>
 
-            <div className="flex min-h-screen">
+            <div className="flex min-h-screen mt-20">
             
 
-            {/* বাম পাশে রিমোট (Sidebar) */}
+         
             <div className="w-80 fixed h-full z-10">
                 <DashboardSidebar />
             </div>
 
-            {/* ডান পাশে টিভি স্ক্রিন (Outlet) - যেখানে পেজ দেখাবে */}
+           
             <div className="flex-1 ml-80 p-8 bg-gray-50 min-h-screen">
-                <Outlet /> {/* <--- এই লাইনটা না থাকলেই পেজ দেখায় না */}
+                <Outlet /> 
             </div>
         </div>
         </div>

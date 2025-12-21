@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 const Banner = () => {
     return (
      <>
-        <div className='flex justify-between items-center ml-20 mr-20'>
+        <div className='flex justify-between items-center ml-20 mr-20 mt-30'>
             <div>
                <h1 className='text-6xl font-semibold'> BookCourier - <br />
                 Library to Home <br />

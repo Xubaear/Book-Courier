@@ -7,7 +7,7 @@ const Invoices = () => {
 
     useEffect(() => {
         if (user?.email) {
-            // আপনার পেমেন্ট হিস্ট্রি লোড হচ্ছে
+            
             fetch(`http://localhost:3000/payments?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => setPayments(data));
@@ -20,7 +20,7 @@ const Invoices = () => {
 
             <div className="overflow-x-auto">
                 <table className="table w-full shadow-lg bg-white">
-                    {/* হেডার */}
+                   
                     <thead className="bg-purple-600 text-white">
                         <tr>
                             <th></th>
@@ -38,18 +38,18 @@ const Invoices = () => {
                             <tr key={payment._id}>
                                 <th>{index + 1}</th>
                                 
-                                {/* Payment/Transaction ID */}
+                               
                                 <td className="font-mono text-green-600 font-bold">
                                     {payment.transactionId}
                                 </td>
                                 
-                                {/* Book Name */}
+                               
                                 <td className="font-semibold text-black">{payment.bookTitle}</td>
                                 
-                                {/* Amount */}
+                               
                                 <td className="text-orange-600 font-bold">{payment.price} Tk</td>
                                 
-                                {/* Date */}
+                             
                                 <td className='text-cyan-950'>{new Date(payment.createdAt).toLocaleDateString()}</td>
                             </tr>
                         ))}

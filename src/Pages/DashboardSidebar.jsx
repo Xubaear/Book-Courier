@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // useNavigate ইম্পোর্ট করুন
-import { AuthContext } from '../Provider/AuthProvider'; // পাথ চেক করুন
+import { Link, useNavigate } from 'react-router-dom'; 
+import { AuthContext } from '../Provider/AuthProvider'; 
 import useRole from '../hooks/useRole';
 
 const DashboardSidebar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [role, isRoleLoading] = useRole();
-    const navigate = useNavigate(); // হুক কল করুন
+    const navigate = useNavigate(); 
 
     const handleLogOut = () => {
         logOut()
             .then(() => {
                 console.log("User logged out successfully");
-                navigate('/login'); // লগআউট হওয়ার পর লগইন পেজে পাঠাবে
+                navigate('/login'); 
             })
             .catch(error => console.error("Logout error:", error));
     };
@@ -23,7 +23,7 @@ const DashboardSidebar = () => {
 
     return (
         <div className="bg-base-200 min-h-full w-80 p-4 pt-10 text-base-content flex flex-col">
-            {/* প্রোফাইল সেকশন */}
+            
             <div className="flex flex-col items-center mb-6">
                 <div className="avatar">
                     <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -37,7 +37,7 @@ const DashboardSidebar = () => {
 
             <div className="divider"></div>
 
-            {/* মেনু আইটেমগুলো */}
+            
             <ul className="menu space-y-2">
                 <li><Link to="/dashboard/profile">My Profile</Link></li>
 
@@ -59,12 +59,12 @@ const DashboardSidebar = () => {
                 {role === 'admin' && (
                     <>
                         <li><Link to="/dashboard/all-users">Manage Users</Link></li>
-                        <li><Link to="/dashboard/manage-books">Manage All Books</Link></li>
+                        <li><Link to="/dashboard/manage-books">Manage Books</Link></li>
                     </>
                 )}
             </ul>
 
-            {/* লগআউট বাটন */}
+          
             <div className="mt-auto">
                 <button 
                     onClick={handleLogOut} 

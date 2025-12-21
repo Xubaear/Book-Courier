@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Provider/AuthProvider'; // আপনার AuthProvider এর পাথ ঠিক আছে কিনা দেখবেন
+import { AuthContext } from '../../Provider/AuthProvider'; 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Payment = () => {
-    const { id } = useParams(); // URL থেকে Order ID নেওয়া হচ্ছে
+    const { id } = useParams(); 
     const { user } = useContext(AuthContext);
     const [order, setOrder] = useState(null);
     const navigate = useNavigate();
 
-    // নির্দিষ্ট অর্ডার লোড করা
+    
     useEffect(() => {
         fetch(`http://localhost:3000/orders/${id}`)
             .then(res => res.json())
@@ -21,19 +21,19 @@ const Payment = () => {
     const handlePayment = (e) => {
         e.preventDefault();
         
-        // ১. একটি ফেইক ট্রানজেকশন আইডি জেনারেট করছি
+        
         const transactionId = "TXN" + Math.floor(Math.random() * 10000000);
 
         const paymentInfo = {
             transactionId: transactionId,
-            userEmail: user?.email, // ইনভয়েস এর জন্য userEmail নামেই সেভ করছি
+            userEmail: user?.email, 
             orderId: id,
             price: order?.price,
             bookTitle: order?.bookTitle,
             date: new Date()
         };
 
-        // ২. ব্যাকএন্ডে পেমেন্ট ইনফো পাঠানো
+      
         fetch('http://localhost:3000/payments', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
@@ -44,7 +44,7 @@ const Payment = () => {
             if (data.insertedId) {
                 toast.success("Payment Successful!");
                 
-                // ৩. ২ সেকেন্ড পর অটোমেটিক Invoices পেজে নিয়ে যাবে
+              
                 setTimeout(() => {
                     navigate('/dashboard/invoices');
                 }, 2000);
@@ -52,7 +52,7 @@ const Payment = () => {
         });
     };
 
-    // ডাটা লোড না হওয়া পর্যন্ত লোডিং স্পিনার দেখাবে
+   
     if (!order) return <div className="flex justify-center mt-20"><span className="loading loading-spinner text-primary loading-lg"></span></div>;
 
     return (

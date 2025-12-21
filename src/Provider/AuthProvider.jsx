@@ -16,7 +16,7 @@ export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // এই স্টেটটা আপনি ব্যবহার করতে চাচ্ছেন
+  const [user, setUser] = useState(null); 
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
@@ -63,23 +63,61 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth)
+        .then(() => {
+            
+            fetch('http://localhost:3000/logout', { method: 'POST', credentials: 'include' });
+            setLoading(false);
+        });
   };
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+
+      if (currentUser) {
+       
+        const userInfo = { email: currentUser.email };
+        
+        fetch('http://localhost:3000/jwt', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userInfo),
+          credentials: 'include' 
+        })
+        .then(res => res.json())
+        .then(data => {
+           setLoading(false); 
+        })
+        .catch(err => {
+            console.error("JWT Error:", err);
+            setLoading(false); 
+        });
+
+      } else {
+        
+        fetch('http://localhost:3000/logout', {
+            method: 'POST',
+            credentials: 'include'
+        })
+        .then(() => {
+            setLoading(false);
+        })
+        .catch(err => {
+            console.log(err);
+            setLoading(false); 
+        });
+      }
     });
     return () => unsubscribe();
   }, []);
 
-  // ==========================================
-  // ফিক্স: এখানে setUser যুক্ত করা হয়েছে
-  // ==========================================
   const authData = {
     user,
-    setUser, // <--- এই লাইনটা আপনার মিসিং ছিল
+    setUser, 
     loading,
     createUser,
     updateUserProfile, 

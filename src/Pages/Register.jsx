@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../Provider/AuthProvider'; // আপনার পাথ অনুযায়ী
+import { AuthContext } from '../Provider/AuthProvider'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,7 +21,7 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    // ভ্যালিডেশন
+   
     const passwordPattern = /^.{6,}$/;
     const casePatterns = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
 
@@ -35,17 +35,17 @@ const Register = () => {
     }
 
     try {
-      // ১. ফায়ারবেসে ইউজার তৈরি করা
+   
       const result = await createUser(email, password);
       const loggedUser = result.user;
       
-      // ২. প্রোফাইল আপডেট করা (নাম ও ছবি)
+      
       await updateUserProfile(name, photo);
       
-      // স্টেট আপডেট করে দেওয়া যাতে সাথে সাথে নাম দেখায়
+     
       setUser({ ...loggedUser, displayName: name, photoURL: photo });
 
-      // ৩. ডাটাবেজে ইউজার ইনফো পাঠানো
+      
       const userInfo = { name, email, role: 'user' };
 
       const response = await fetch('http://localhost:3000/users', {
@@ -56,16 +56,16 @@ const Register = () => {
 
       const data = await response.json();
 
-      // ৪. সবকিছু ঠিক থাকলে সাকসেস মেসেজ এবং রিডাইরেক্ট
+     
       if (data.insertedId || data.message === 'User already exists') {
         toast.success('Registration Successful!');
         form.reset();
-        navigate('/'); // হোম পেজে পাঠাবে
+        navigate('/'); 
       }
 
     } catch (error) {
       console.error(error);
-      toast.error(error.message); // কোনো এরর হলে এখানে দেখাবে
+      toast.error(error.message); 
     }
   };
 

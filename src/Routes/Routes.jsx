@@ -14,6 +14,11 @@ import Invoices from "../Dashboard/User/Invoices";
 import PrivateRoute from "../Provider/PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Payment from "../Dashboard/User/Payment";
+import AddBook from "../Dashboard/Librarian/AddBook";
+import MyBooks from "../Dashboard/Librarian/MyBook";
+import ManageOrders from "../Dashboard/Librarian/ManageOrders";
+import AllUsers from "../Dashboard/Admin/AllUsers";
+import ManageBooks from "../Dashboard/Admin/ManageBooks";
 
 
 const router = createBrowserRouter([
@@ -62,11 +67,28 @@ const router = createBrowserRouter([
         {
         path: 'payment/:id',
         element: <Payment />
-    }
+    },
+    {
+        path: 'add-book',
+        element: <AddBook />
+    },
+    {
+        path: 'my-books',
+        element: <MyBooks />
+    },
+    {
+        path: 'orders', 
+        element: <ManageOrders />
+    },
         
-        // ভবিষ্যতে Admin বা Librarian রাউট এখানে যোগ করতে পারবেন
-        // { path: "all-users", element: <AllUsers /> },
-        // { path: "add-book", element: <AddBook /> },
+        { 
+            path: "all-users", 
+            element: <AllUsers /> 
+        },
+        { 
+            path: "manage-books", 
+            element: <ManageBooks /> 
+        }
     ]
   }
 ]);

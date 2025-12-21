@@ -16,9 +16,9 @@ const Coverage = () => {
 
   return (
     <div>
-      <h2 className='text-5xl my-20 text-center text-amber-100 font-bold'>
-        We are available in 64 districts
-      </h2>
+      <h2 className='text-5xl my-20 text-center font-bold white: text-orange-600 dark: text-amber-100'>
+   We are available in 64 districts
+</h2>
 
       
 

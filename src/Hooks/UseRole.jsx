@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider"; // পাথ ঠিক আছে কিনা চেক করবেন
+import { AuthContext } from "../Provider/AuthProvider"; 
 
 const useRole = () => {
     const { user, loading } = useContext(AuthContext);

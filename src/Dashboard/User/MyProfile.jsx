@@ -13,7 +13,7 @@ const MyProfile = () => {
 
         updateUserProfile(name, photo)
             .then(() => {
-                // স্টেট আপডেট করা যাতে পেজ রিফ্রেশ ছাড়াই নাম চেঞ্জ হয়
+                
                 setUser({ ...user, displayName: name, photoURL: photo });
                 toast.success("Profile Updated Successfully!");
             })
