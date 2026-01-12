@@ -74,10 +74,10 @@ const AllBooks = () => {
 
   return (
     <div className="min-h-screen container mx-auto p-4 md:p-6 pt-32">
-      <h1 className="text-4xl md:text-5xl font-bold text-primary mb-8 text-center">Books Collection</h1>
+      <h1 className="text-4xl md:text-5xl font-bold text-primary mb-8 mt-20 text-center">Books Collection</h1>
 
       {/* Search and Filters */}
-      <div className="bg-base-200 rounded-xl p-6 mb-8 shadow-lg">
+      <div className="bg-gray-800 rounded-xl p-6 mb-8 shadow-lg">
         <div className="space-y-4">
           {/* Search Bar */}
           <div className="form-control">
@@ -130,9 +130,9 @@ const AllBooks = () => {
                 }}
               >
                 <option value="all">All Prices</option>
-                <option value="low">Low (≤ 100 Tk)</option>
+                <option value="low">Low ( 100 or less Tk)</option>
                 <option value="medium">Medium (101-300 Tk)</option>
-                <option value="high">High (> 300 Tk)</option>
+                <option value="high">High ( 300 or more Tk)</option>
               </select>
             </div>
 
@@ -228,7 +228,7 @@ const AllBooks = () => {
                   )}
                 </figure>
 
-                <div className="card-body flex-grow flex flex-col p-4">
+                <div className="card-body grow flex flex-col p-4">
                   <h2 className="card-title text-base font-semibold line-clamp-2 mb-1">{book.title}</h2>
                   <p className="text-sm text-base-content/60 mb-2 line-clamp-1">By {book.author}</p>
                   

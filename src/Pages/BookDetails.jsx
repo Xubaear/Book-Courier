@@ -87,7 +87,7 @@ const BookDetails = () => {
             .catch(() => toast.error('Failed to place order'));
     };
 
-    // Create array of images (using cover image multiple times for demo, or actual multiple images if available)
+   
     const bookImages = book?.images || [book?.coverImage, book?.coverImage, book?.coverImage].filter(Boolean);
 
     if (loading) {
@@ -137,7 +137,7 @@ const BookDetails = () => {
                                             <button
                                                 key={index}
                                                 onClick={() => setSelectedImageIndex(index)}
-                                                className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                                                className={`shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
                                                     selectedImageIndex === index ? 'border-primary' : 'border-base-300'
                                                 }`}
                                             >
@@ -201,10 +201,11 @@ const BookDetails = () => {
                                 <h3 className="text-xl font-bold mb-4">Place Order</h3>
                                 {user ? (
                                     <>
-                                        <div className="form-control">
-                                            <label className="label">
+                                    <label className="label">
                                                 <span className="label-text font-semibold">Phone Number</span>
                                             </label>
+                                        <div className="form-control ">
+                                            
                                             <input
                                                 type="tel"
                                                 name="phone"
@@ -213,14 +214,15 @@ const BookDetails = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="form-control">
-                                            <label className="label">
+                                        <label className="label">
                                                 <span className="label-text font-semibold">Shipping Address</span>
                                             </label>
+                                        <div className="form-control">
+                                            
                                             <textarea
                                                 name="address"
                                                 placeholder="Enter your delivery address"
-                                                className="textarea textarea-bordered h-24"
+                                                className="textarea textarea-bordered h-10"
                                                 required
                                             ></textarea>
                                         </div>
@@ -304,34 +306,7 @@ const BookDetails = () => {
                     </div>
                 </div>
 
-                {/* Related Books */}
-                {relatedBooks.length > 0 && (
-                    <div className="mb-12">
-                        <h2 className="text-3xl font-bold mb-6">Related Books</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                            {relatedBooks.slice(0, 4).map((relatedBook) => (
-                                <Link
-                                    key={relatedBook._id}
-                                    to={`/book/${relatedBook._id}`}
-                                    className="card bg-base-100 shadow-lg hover:shadow-xl transition-all hover:scale-105 border border-base-300 rounded-xl overflow-hidden"
-                                >
-                                    <figure className="h-48">
-                                        <img
-                                            src={relatedBook.coverImage}
-                                            alt={relatedBook.title}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </figure>
-                                    <div className="card-body p-4">
-                                        <h3 className="card-title text-sm line-clamp-2">{relatedBook.title}</h3>
-                                        <p className="text-xs text-base-content/60">{relatedBook.author}</p>
-                                        <p className="text-base font-bold text-primary">{relatedBook.price} Tk</p>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                
             </div>
             <ToastContainer position="top-right" autoClose={3000} />
         </div>

@@ -22,7 +22,7 @@ const Coverage = () => {
 
       
 
-     <div className='flex justify-center items-center gap-20 mx-20'>
+     <div className='flex flex-col md:flex-row justify-center items-center gap-20 mx-20'>
          <div className='border w-[500px] h-[400px]  mb-10'>
         <MapContainer
           center={position}

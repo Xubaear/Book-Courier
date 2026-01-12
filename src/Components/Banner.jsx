@@ -6,9 +6,9 @@ import { Link } from 'react-router';
 const Banner = () => {
     return (
      <>
-        <div className='flex justify-between items-center ml-20 mr-20 mt-30'>
+        <div className='flex flex-col-reverse md:flex-row  justify-between items-center ml-20 mr-20 mt-30'>
             <div>
-               <h1 className='text-6xl font-semibold'> BookCourier - <br />
+               <h1 className='text-4xl mt-7 md:text-6xl font-semibold'> BookCourier - <br />
                 Library to Home <br />
                 Delivery System</h1>
 
@@ -22,7 +22,9 @@ const Banner = () => {
             </div>
 
             <div>
-                <img className='w-140 h-100 rounded-xl' src={bookImg} alt="" />
+                <img className='w-200 h-80 md:w-140 md:h-100 rounded-xl 
+                
+                ' src={bookImg} alt="" />
             </div>
         </div>
         <Books></Books>
