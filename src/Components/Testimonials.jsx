@@ -1,0 +1,73 @@
+import React from 'react';
+
+const Testimonials = () => {
+    const testimonials = [
+        {
+            name: 'Ahmed Rahman',
+            role: 'Student, Dhaka University',
+            image: '👨‍🎓',
+            text: 'BookCourier has made my research so much easier! I can access any book I need without leaving my dorm. The delivery is always on time and books arrive in perfect condition.',
+            rating: 5
+        },
+        {
+            name: 'Fatima Khan',
+            role: 'Teacher, Chittagong',
+            image: '👩‍🏫',
+            text: 'As an educator, I need access to various educational resources. BookCourier provides exactly that with their extensive collection and reliable service. Highly recommended!',
+            rating: 5
+        },
+        {
+            name: 'Mohammad Ali',
+            role: 'Business Professional',
+            image: '👨‍💼',
+            text: 'The convenience of having books delivered to my home is unmatched. Great service, reasonable prices, and excellent customer support. This is the future of libraries!',
+            rating: 5
+        }
+    ];
+
+    return (
+        <section className="py-16 md:py-20 bg-base-200">
+            <div className="container mx-auto px-4 md:px-8">
+                <div className="text-center mb-12">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">What Our Customers Say</h2>
+                    <p className="text-xl text-base-content/70 max-w-2xl mx-auto">
+                        Real feedback from our valued readers
+                    </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {testimonials.map((testimonial, index) => (
+                        <div key={index} className="card bg-base-100 shadow-xl">
+                            <div className="card-body">
+                                <div className="flex items-center mb-4">
+                                    <div className="avatar placeholder">
+                                        <div className="bg-neutral text-neutral-content rounded-full w-12 text-2xl">
+                                            <span>{testimonial.image}</span>
+                                        </div>
+                                    </div>
+                                    <div className="ml-4">
+                                        <h4 className="font-bold">{testimonial.name}</h4>
+                                        <p className="text-sm text-base-content/60">{testimonial.role}</p>
+                                    </div>
+                                </div>
+                                <div className="rating rating-sm mb-3">
+                                    {[...Array(5)].map((_, i) => (
+                                        <input
+                                            key={i}
+                                            type="radio"
+                                            className="mask mask-star-2 bg-yellow-400"
+                                            checked={i < testimonial.rating}
+                                            readOnly
+                                        />
+                                    ))}
+                                </div>
+                                <p className="text-base-content/80 italic">"{testimonial.text}"</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Testimonials;

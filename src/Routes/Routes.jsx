@@ -3,6 +3,13 @@ import HomeLayout from "../Layout/HomeLayout";
 
 import Home from "../Components/Home";
 import AllBooks from "../Pages/AllBooks";
+import About from "../Pages/About";
+import Contact from "../Pages/Contact";
+import Blog from "../Pages/Blog";
+import Help from "../Pages/Help";
+import Privacy from "../Pages/Privacy";
+import Terms from "../Pages/Terms";
+import BookDetails from "../Pages/BookDetails";
 import Error from "../Pages/Error";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
@@ -34,6 +41,34 @@ const router = createBrowserRouter([
         {
           path: '/all-books',
           element: <PrivateRoute><AllBooks /></PrivateRoute> 
+        },
+        {
+          path: '/book/:id',
+          element: <BookDetails />
+        },
+        {
+          path: '/about',
+          element: <About />
+        },
+        {
+          path: '/contact',
+          element: <Contact />
+        },
+        {
+          path: '/blog',
+          element: <Blog />
+        },
+        {
+          path: '/help',
+          element: <Help />
+        },
+        {
+          path: '/privacy',
+          element: <Privacy />
+        },
+        {
+          path: '/terms',
+          element: <Terms />
         },
         {
           path: '/login',

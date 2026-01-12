@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,11 +9,54 @@ const Login = () => {
     document.title = 'Login';
   }, []);
 
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, signInWithFacebook } = useContext(AuthContext);
   const emailRef = useRef();
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleDemoLogin = () => {
+    const demoEmail = 'demo@bookcourier.com';
+    const demoPassword = 'Demo123';
+    
+    // Auto-fill form
+    if (emailRef.current) {
+      emailRef.current.value = demoEmail;
+    }
+    
+    setLoading(true);
+    signIn(demoEmail, demoPassword)
+      .then((res) => {
+        toast.success('Demo login successful!');
+        const from = location.state?.from?.pathname || '/';
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error('Demo login failed. Please use regular login.');
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const validateForm = (email, password) => {
+    const newErrors = {};
+    
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,20 +64,39 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    if (!validateForm(email, password)) {
+      return;
+    }
+
+    setLoading(true);
     signIn(email, password)
       .then((res) => {
         const user = res.user;
         toast.success('Login successful!');
-
+        setErrors({});
         const from = location.state?.from?.pathname || '/';
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        toast.error('Login failed');
-      });
+        if (error.code === 'auth/user-not-found') {
+          setErrors({ email: 'No account found with this email' });
+          toast.error('No account found with this email');
+        } else if (error.code === 'auth/wrong-password') {
+          setErrors({ password: 'Incorrect password' });
+          toast.error('Incorrect password');
+        } else if (error.code === 'auth/invalid-email') {
+          setErrors({ email: 'Invalid email address' });
+          toast.error('Invalid email address');
+        } else {
+          setErrors({ general: 'Login failed. Please try again.' });
+          toast.error('Login failed. Please try again.');
+        }
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleGoogleSignIn = () => {
+    setLoading(true);
     signInWithGoogle()
       .then((result) => {
         toast.success('Google login successful!');
@@ -42,53 +104,135 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        toast.error('Login failed');
-      });
+        toast.error('Google login failed');
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const handleFacebookSignIn = () => {
+    setLoading(true);
+    signInWithFacebook()
+      .then((result) => {
+        toast.success('Facebook login successful!');
+        const from = location.state?.from?.pathname || '/';
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error('Facebook login failed');
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-base-200 min-h-screen pt-20">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl ">
+        <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
           <div className="card-body">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <form onSubmit={handleLogin}>
-              <fieldset className="fieldset">
-                <label className="label mt-10">Email</label>
+            <h1 className="text-4xl font-bold text-center mb-2">Login</h1>
+            <p className="text-center text-base-content/70 mb-6">Welcome back! Please login to your account.</p>
+
+            {errors.general && (
+              <div className="alert alert-error">
+                <span>{errors.general}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-semibold">Email</span>
+                </label>
                 <input
                   name="email"
                   type="email"
-                  className="input"
+                  className={`input input-bordered ${errors.email ? 'input-error' : ''}`}
                   ref={emailRef}
-                  placeholder="Email"
+                  placeholder="Enter your email"
+                  required
                 />
+                {errors.email && (
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.email}</span>
+                  </label>
+                )}
+              </div>
 
-                <label className="label">Password</label>
-                <input name="password" type="password" className="input" placeholder="Password" />
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-semibold">Password</span>
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  className={`input input-bordered ${errors.password ? 'input-error' : ''}`}
+                  placeholder="Enter your password"
+                  required
+                />
+                {errors.password && (
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.password}</span>
+                  </label>
+                )}
+              </div>
 
-                <button type="submit" className="btn btn-neutral mt-4">
-                  Login
-                </button>
-
-                <p className="text-center">-------Or login with-------</p>
-              </fieldset>
+              <button
+                type="submit"
+                className={`btn btn-primary w-full mt-4 ${loading ? 'loading' : ''}`}
+                disabled={loading}
+              >
+                {loading ? 'Logging in...' : 'Login'}
+              </button>
             </form>
 
-            <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5]">
-              Google
+            <div className="divider">OR</div>
+
+            {/* Demo Login Button */}
+            <button
+              onClick={handleDemoLogin}
+              className="btn btn-outline btn-secondary w-full"
+              disabled={loading}
+            >
+              🎮 Demo Login
             </button>
 
-            <p>
-              Don't Have Any Account?{' '}
-              <Link to="/register" className="underline text-red-500">
-                Register
+            {/* Social Login */}
+            <div className="space-y-2">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn btn-outline w-full border-base-300 hover:bg-base-200"
+                disabled={loading}
+              >
+                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                Continue with Google
+              </button>
+
+              <button
+                onClick={handleFacebookSignIn}
+                className="btn btn-outline w-full border-base-300 hover:bg-base-200"
+                disabled={loading}
+              >
+                <svg className="w-5 h-5 mr-2" fill="#1877F2" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Continue with Facebook
+              </button>
+            </div>
+
+            <p className="text-center mt-4">
+              Don't have an account?{' '}
+              <Link to="/register" className="link link-primary font-semibold">
+                Register here
               </Link>
             </p>
           </div>
         </div>
       </div>
 
-      
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </div>
   );

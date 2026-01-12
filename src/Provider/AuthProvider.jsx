@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword, 
   getAuth, 
   GoogleAuthProvider, 
+  FacebookAuthProvider,
   onAuthStateChanged, 
   signInWithEmailAndPassword, 
   signInWithPopup, 
@@ -14,6 +15,7 @@ import {
 const auth = getAuth(app);
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
@@ -39,6 +41,31 @@ const AuthProvider = ({ children }) => {
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const loggedUser = result.user;
+        const saveUser = { 
+            name: loggedUser.displayName, 
+            email: loggedUser.email,
+            role: 'user'
+        };
+
+        fetch('https://bookcourier.vercel.app/users', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(saveUser)
+        })
+        .then(res => res.json())
+        .then(() => {
+             setUser(loggedUser);
+        });
+        
+        return loggedUser;
+      });
+  };
+
+  const signInWithFacebook = () => {
+    setLoading(true);
+    return signInWithPopup(auth, facebookProvider)
       .then((result) => {
         const loggedUser = result.user;
         const saveUser = { 
@@ -123,6 +150,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile, 
     signIn,
     signInWithGoogle,
+    signInWithFacebook,
     logOut
   };
 
