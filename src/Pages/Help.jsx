@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -141,7 +142,9 @@ const Help = () => {
                             <div className="text-4xl mb-4">💬</div>
                             <h3 className="card-title">Live Chat</h3>
                             <p className="text-base-content/70">Chat with us</p>
-                            <button className="btn btn-primary btn-sm mt-2">Start Chat</button>
+                            <Link to='/chat'>
+                             <button className="btn btn-primary btn-sm mt-2">Start Chat</button></Link>
+                           
                             <p className="text-sm text-base-content/60">Available 24/7</p>
                         </div>
                     </div>

@@ -24,6 +24,7 @@ import MyBooks from "../Dashboard/Librarian/MyBook";
 import ManageOrders from "../Dashboard/Librarian/ManageOrders";
 import AllUsers from "../Dashboard/Admin/AllUsers";
 import ManageBooks from "../Dashboard/Admin/ManageBooks";
+import SarcasticLoader from "../Pages/SarcasticLoader";
 
 
 const router = createBrowserRouter([
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
         {
           path: '/register',
           element: <Register />
+        },
+        {
+          path: '/chat',
+          element: <SarcasticLoader />
         }
     ]
   },

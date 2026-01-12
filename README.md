@@ -45,6 +45,7 @@ Here are the main npm packages used in this project:
 * `leaflet`
 * `react-leaflet`
 * `vite`
+* `framer-motion`
 
 ### ⚙️ **Backend Dependencies**
 * `express`
