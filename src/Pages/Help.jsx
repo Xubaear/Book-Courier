@@ -179,10 +179,10 @@ const Help = () => {
                             Can't find what you're looking for? Fill out the form below and our support team will get back to you as soon as possible.
                         </p>
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="form-control">
+                            <div className="grid grid-cols-1 md:grid-row-2 gap-4">
+                                <div className="form-control ">
                                     <label className="label">
-                                        <span className="label-text font-semibold">Name *</span>
+                                        <span className="label-text font-semibold ">Name</span>
                                     </label>
                                     <input
                                         type="text"
@@ -190,13 +190,13 @@ const Help = () => {
                                         value={contactForm.name}
                                         onChange={handleChange}
                                         placeholder="Your full name"
-                                        className="input input-bordered"
+                                        className="input input-bordered "
                                         required
                                     />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text font-semibold">Email *</span>
+                                        <span className="label-text font-semibold">Email </span>
                                     </label>
                                     <input
                                         type="email"
@@ -224,7 +224,7 @@ const Help = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text font-semibold">Message *</span>
+                                    <span className="label-text font-semibold">Message </span>
                                 </label>
                                 <textarea
                                     name="message"

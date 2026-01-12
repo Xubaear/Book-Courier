@@ -7,8 +7,6 @@ import About from "../Pages/About";
 import Contact from "../Pages/Contact";
 import Blog from "../Pages/Blog";
 import Help from "../Pages/Help";
-import Privacy from "../Pages/Privacy";
-import Terms from "../Pages/Terms";
 import BookDetails from "../Pages/BookDetails";
 import Error from "../Pages/Error";
 import Login from "../Pages/Login";
@@ -62,14 +60,8 @@ const router = createBrowserRouter([
           path: '/help',
           element: <Help />
         },
-        {
-          path: '/privacy',
-          element: <Privacy />
-        },
-        {
-          path: '/terms',
-          element: <Terms />
-        },
+        
+        
         {
           path: '/login',
           element: <Login />

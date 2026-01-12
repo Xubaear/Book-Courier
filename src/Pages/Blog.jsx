@@ -63,7 +63,7 @@ const Blog = () => {
         <div className="min-h-screen pt-32 pb-20 px-4 md:px-8">
             <div className="container mx-auto max-w-6xl">
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                         BookCourier Blog
                     </h1>
                     <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
@@ -73,8 +73,8 @@ const Blog = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {blogPosts.map((post) => (
-                        <article key={post.id} className="card bg-base-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-2">
-                            <div className="card-body">
+                        <article key={post.id} className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20  cursor-pointer transition-all hover:-translate-y-2">
+                            <div className="card-body ">
                                 <div className="flex items-center justify-between mb-3">
                                     <span className="badge badge-primary badge-outline">{post.category}</span>
                                     <span className="text-xs text-base-content/60">{post.readTime}</span>
@@ -84,32 +84,14 @@ const Blog = () => {
                                 <p className="text-base-content/70 mb-4 line-clamp-3">{post.excerpt}</p>
                                 <div className="flex justify-between items-center mt-auto">
                                     <span className="text-sm text-base-content/60">{post.date}</span>
-                                    <Link to={`/blog/${post.id}`} className="text-primary font-semibold text-sm hover:underline">
-                                        Read More →
-                                    </Link>
+                                    
                                 </div>
                             </div>
                         </article>
                     ))}
                 </div>
 
-                {/* Newsletter CTA */}
-                <div className="mt-16 card bg-gradient-to-r from-primary to-secondary shadow-xl">
-                    <div className="card-body text-center">
-                        <h2 className="card-title text-3xl text-white justify-center mb-4">Stay Updated</h2>
-                        <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-                            Subscribe to our newsletter and never miss a blog post, book recommendation, or library update.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto w-full">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="flex-1 input input-bordered"
-                            />
-                            <button className="btn btn-accent text-white">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     );
