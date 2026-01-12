@@ -37,7 +37,7 @@ const Newsletter = () => {
                         Stay Updated
                     </h2>
                     
-                    <p className="text-xl text-white/90 mt-10 mb-8">
+                    <p className="text-xl text-gray-500 mt-10 mb-8">
                         Subscribe to our newsletter and get the latest updates on new books, promotions, and reading tips delivered to your inbox.
                     </p>
                     <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">

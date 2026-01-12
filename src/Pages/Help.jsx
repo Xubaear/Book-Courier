@@ -108,7 +108,7 @@ const Help = () => {
         <div className="min-h-screen pt-32 pb-20 px-4 md:px-8">
             <div className="container mx-auto max-w-6xl">
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                         Help & Support
                     </h1>
                     <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
@@ -118,7 +118,7 @@ const Help = () => {
 
                 {/* Quick Contact Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <div className="card bg-base-200 shadow-lg">
+                    <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20  cursor-pointer transition-all hover:-translate-y-2">
                         <div className="card-body items-center text-center">
                             <div className="text-4xl mb-4">📞</div>
                             <h3 className="card-title">Phone Support</h3>
@@ -127,7 +127,7 @@ const Help = () => {
                             <p className="text-sm text-base-content/60">Mon-Fri: 9AM-6PM</p>
                         </div>
                     </div>
-                    <div className="card bg-base-200 shadow-lg">
+                    <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20  cursor-pointer transition-all hover:-translate-y-2">
                         <div className="card-body items-center text-center">
                             <div className="text-4xl mb-4">✉️</div>
                             <h3 className="card-title">Email Support</h3>
@@ -136,7 +136,7 @@ const Help = () => {
                             <p className="text-sm text-base-content/60">Response within 24hrs</p>
                         </div>
                     </div>
-                    <div className="card bg-base-200 shadow-lg">
+                    <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20  cursor-pointer transition-all hover:-translate-y-2">
                         <div className="card-body items-center text-center">
                             <div className="text-4xl mb-4">💬</div>
                             <h3 className="card-title">Live Chat</h3>
@@ -172,7 +172,7 @@ const Help = () => {
                 </div>
 
                 {/* Contact Form */}
-                <div className="card bg-base-100 shadow-xl">
+                <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20">
                     <div className="card-body">
                         <h2 className="card-title text-2xl mb-4">Still Need Help?</h2>
                         <p className="text-base-content/70 mb-6">

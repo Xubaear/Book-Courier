@@ -41,7 +41,7 @@ const Contact = () => {
         <div className="min-h-screen pt-32 pb-20 px-4 md:px-8">
             <div className="container mx-auto max-w-6xl">
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                         Contact Us
                     </h1>
                     <p className="text-xl text-base-content/80">
@@ -52,7 +52,7 @@ const Contact = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Contact Information */}
                     <div className="space-y-6">
-                        <div className="card bg-base-200 shadow-xl">
+                        <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20">
                             <div className="card-body">
                                 <h2 className="card-title text-2xl mb-4">Get in Touch</h2>
                                 <div className="space-y-4">
@@ -101,7 +101,7 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        <div className="card bg-base-200 shadow-xl">
+                        <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20">
                             <div className="card-body">
                                 <h3 className="font-bold text-lg mb-4">Follow Us</h3>
                                 <div className="flex gap-4">
@@ -126,7 +126,7 @@ const Contact = () => {
                     </div>
 
                     {/* Contact Form */}
-                    <div className="card bg-base-200 shadow-xl">
+                    <div className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20">
                         <div className="card-body">
                             <h2 className="card-title text-2xl mb-4">Send us a Message</h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
