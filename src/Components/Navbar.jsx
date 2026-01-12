@@ -30,7 +30,6 @@ const Navbar = () => {
             .catch(error => console.log(error));
     }
 
-    // Routes when logged out (minimum 3)
     const publicLinks = (
         <>
             <li><Link to='/'>Home</Link></li>
@@ -39,7 +38,6 @@ const Navbar = () => {
         </>
     )
 
-    // Routes when logged in (minimum 5)
     const privateLinks = (
         <>
             <li><Link to='/'>Home</Link></li>
@@ -59,7 +57,7 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> 
                         </svg>
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg">
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-lg">
                         {user ? privateLinks : publicLinks}
                     </ul>
                 </div>
@@ -98,7 +96,7 @@ const Navbar = () => {
                                 />
                             </div>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-lg">
                             <li className="menu-title">
                                 <span>{user?.displayName || "User"}</span>
                                 <span className="badge badge-secondary text-xs uppercase">{role || "user"}</span>

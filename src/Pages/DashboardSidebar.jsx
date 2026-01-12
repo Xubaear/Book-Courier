@@ -73,12 +73,7 @@ const DashboardSidebar = () => {
                     Logout
                 </button>
                 
-                <label 
-                    htmlFor="dashboard-drawer" 
-                    className="btn btn-outline btn-sm w-full mt-4"
-                >
-                    Close Menu
-                </label>
+                
             </div>
         </div>
     );
