@@ -6,7 +6,7 @@
 
 ## 🔗 LIVE URL
 
-### [https://book-courier-service.netlify.app/]
+### https://book-courier-service.netlify.app/
 
 
 ---
