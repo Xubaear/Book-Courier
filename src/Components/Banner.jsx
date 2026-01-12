@@ -17,7 +17,7 @@ const Banner = () => {
                     favourite library without visiting physically
                 </p>
 
-               <Link to='/login'> <button  className="btn btn-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-5">Get Strated</button></Link>
+               <Link to='/login'> <button  className="btn btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-5">Get Strated</button></Link>
                 
             </div>
 

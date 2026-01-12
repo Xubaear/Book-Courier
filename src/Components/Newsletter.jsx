@@ -51,7 +51,7 @@ const Newsletter = () => {
                         />
                         <button
                             type="submit"
-                            className={`btn btn-lg btn-accent text-white ${loading ? 'loading' : ''}`}
+                            className={`btn btn-lg btn-primary text-white ${loading ? 'loading' : ''}`}
                             disabled={loading}
                         >
                             {loading ? 'Subscribing...' : 'Subscribe'}
