@@ -30,13 +30,14 @@ const Newsletter = () => {
     };
 
     return (
-        <section className="py-16 md:py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-16 md:py-20 ">
             <div className="container mx-auto px-4 md:px-8">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                <div className="max-w-3xl mx-auto text-center ">
+                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-pink-900 mb-4 ">
                         Stay Updated
                     </h2>
-                    <p className="text-xl text-white/90 mb-8">
+                    
+                    <p className="text-xl text-white/90 mt-10 mb-8">
                         Subscribe to our newsletter and get the latest updates on new books, promotions, and reading tips delivered to your inbox.
                     </p>
                     <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
@@ -59,6 +60,7 @@ const Newsletter = () => {
                     <p className="text-sm text-white/70 mt-4">
                         We respect your privacy. Unsubscribe at any time.
                     </p>
+                    
                 </div>
             </div>
             <ToastContainer position="top-center" autoClose={3000} />

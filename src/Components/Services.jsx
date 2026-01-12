@@ -28,14 +28,14 @@ const Services = () => {
         <section className="py-16 md:py-20 bg-base-100">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-pink-900">Our Services</h2>
                     <p className="text-xl text-base-content/70 max-w-2xl mx-auto">
                         Comprehensive library services delivered to your doorstep
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {services.map((service, index) => (
-                        <div key={index} className="card bg-base-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-2">
+                        <div key={index} className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20 hover:shadow-xl transition-all hover:-translate-y-2">
                             <div className="card-body items-center text-center">
                                 <div className="text-6xl mb-4">{service.icon}</div>
                                 <h3 className="card-title text-lg mb-2">{service.title}</h3>

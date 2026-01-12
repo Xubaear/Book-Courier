@@ -16,7 +16,7 @@ const Coverage = () => {
 
   return (
     <div>
-      <h2 className='text-5xl my-20 text-center font-bold white: text-orange-600 dark: text-amber-100'>
+      <h2 className='text-5xl my-20 text-center font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-pink-900'>
    We are available in 64 districts
 </h2>
 

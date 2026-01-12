@@ -24,11 +24,11 @@ const BlogPreview = () => {
     ];
 
     return (
-        <section className="py-16 md:py-20 bg-base-100">
+        <section className="py-16 md:py-20">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="flex justify-between items-center mb-12">
                     <div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Latest Blog Posts</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-pink-900">Latest Blog Posts</h2>
                         <p className="text-xl text-base-content/70">
                             Stay updated with reading tips, book reviews, and library news
                         </p>
@@ -39,7 +39,7 @@ const BlogPreview = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {blogs.map((blog, index) => (
-                        <Link key={index} to="/blog" className="card bg-base-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-2">
+                        <Link key={index} to="/blog" className="card bg-linear-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/20 hover:shadow-xl transition-all hover:-translate-y-2">
                             <div className="card-body">
                                 <div className="badge badge-primary badge-outline mb-2">{blog.category}</div>
                                 <h3 className="card-title text-lg mb-2 line-clamp-2">{blog.title}</h3>
